@@ -8,7 +8,7 @@ TOOL : symbi yosys,
 Assumptions,Description
 m_initial_rst,Put the Fifo design in reset state before applying any inputs
 m_ND_start,ND_start should be single pulse in entire proof 
-m_wr_en_0,write enable should be zero in FSM ìstartî state
+m_wr_en_0,write enable should be zero in FSM ‚Äústart‚Äù state
 ,
 Assertions , Description
 ,

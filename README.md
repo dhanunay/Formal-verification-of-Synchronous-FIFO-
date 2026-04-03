@@ -109,8 +109,5 @@ SBY 10:04:28 [fifo_basic] summary: Elapsed process time [H:MM:SS (secs)]: 0:01:1
 SBY 10:04:28 [fifo_basic] summary: engine_0 (smtbmc boolector) returned pass
 SBY 10:04:28 [fifo_basic] summary: engine_0 did not produce any traces
 SBY 10:04:28 [fifo_basic] DONE (PASS, rc=0)
-⦗OSS CAD Suite⦘ india@india-Lenovo-ideapad-320-15IKB:~/Downloads/yosys$  
+⦗OSS CAD Suite⦘ india@india-Lenovo-ideapad-320-15IKB:~/Downloads/yosys$
 ```
-Why: No such file or directory
-Error opening  .vcd file 'fifo_basic/engine_0/trace.vcd'.
-Why: No such file or di

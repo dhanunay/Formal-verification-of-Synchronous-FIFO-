@@ -1,0 +1,181 @@
+OSS CAD Suite⦘ india@india-Lenovo-ideapad-320-15IKB:~/Downloads/yosys$ sby -f fifo.sby 
+SBY 17:21:19 [fifo_basic] Removing directory '/home/india/Downloads/yosys/fifo_basic'.
+SBY 17:21:19 [fifo_basic] Copy '/home/india/Downloads/yosys/fifo.sv' to '/home/india/Downloads/yosys/fifo_basic/src/fifo.sv'.
+SBY 17:21:19 [fifo_basic] engine_0: smtbmc boolector
+SBY 17:21:19 [fifo_cover] Removing directory '/home/india/Downloads/yosys/fifo_cover'.
+SBY 17:21:19 [fifo_cover] Copy '/home/india/Downloads/yosys/fifo.sv' to '/home/india/Downloads/yosys/fifo_cover/src/fifo.sv'.
+SBY 17:21:19 [fifo_cover] engine_0: smtbmc boolector
+SBY 17:21:19 [fifo_basic] base: starting process "cd fifo_basic/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:21:19 [fifo_cover] base: starting process "cd fifo_cover/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:21:19 [fifo_basic] base: fifo.sv:31: Warning: Ignoring call to system task $monitor.
+SBY 17:21:19 [fifo_cover] base: fifo.sv:31: Warning: Ignoring call to system task $monitor.
+SBY 17:21:19 [fifo_basic] base: Warning: Wire fifo.\ND_start is used but has no driver.
+SBY 17:21:19 [fifo_cover] base: Warning: Wire fifo.\ND_start is used but has no driver.
+SBY 17:21:19 [fifo_basic] base: finished (returncode=0)
+SBY 17:21:19 [fifo_basic] prep: starting process "cd fifo_basic/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:21:19 [fifo_cover] base: finished (returncode=0)
+SBY 17:21:19 [fifo_cover] prep: starting process "cd fifo_cover/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:21:19 [fifo_basic] prep: Warning: Wire fifo.\ND_start is used but has no driver.
+SBY 17:21:19 [fifo_cover] prep: Warning: Wire fifo.\ND_start is used but has no driver.
+SBY 17:21:19 [fifo_basic] prep: finished (returncode=0)
+SBY 17:21:19 [fifo_basic] smt2: starting process "cd fifo_basic/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:21:19 [fifo_cover] prep: finished (returncode=0)
+SBY 17:21:19 [fifo_cover] smt2: starting process "cd fifo_cover/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:21:19 [fifo_basic] smt2: finished (returncode=0)
+SBY 17:21:19 [fifo_basic] engine_0: starting process "cd fifo_basic; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 32  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 17:21:19 [fifo_cover] smt2: finished (returncode=0)
+SBY 17:21:19 [fifo_cover] engine_0: starting process "cd fifo_cover; yosys-smtbmc -s boolector --presat --unroll -c --noprogress -t 20  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_reset_0
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_wr_en_and_din
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_read_data_at_empty
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_rd_en_and_dout
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_data_sampling
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 1 at fifo: c_push_data_at_full
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace4.vcd
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace4_tb.v
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace4.smtc
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace4.yw
+SBY 17:21:19 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 17:21:19 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 2 at fifo: c_reset_1
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace5.vcd
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace5_tb.v
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace5.smtc
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace5.yw
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at fifo: c_empty
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace6.vcd
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace6_tb.v
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace6.smtc
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace6.yw
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 8..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 8..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Reached cover statement in step 9 at fifo: c_full
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 9..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace7.vcd
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 9..
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace7_tb.v
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace7.smtc
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace7.yw
+SBY 17:21:20 [fifo_cover] engine_0: ##   0:00:00  Status: passed
+SBY 17:21:20 [fifo_cover] engine_0: finished (returncode=0)
+SBY 17:21:20 [fifo_cover] engine_0: Status returned by engine: pass
+SBY 17:21:20 [fifo_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:21:20 [fifo_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:21:20 [fifo_cover] summary: engine_0 (smtbmc boolector) returned pass
+SBY 17:21:20 [fifo_cover] summary: cover trace: fifo_cover/engine_0/trace0.vcd
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_reset_0 at fifo.sv:80.1-80.26 step 1
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_wr_en_and_din at fifo.sv:82.1-82.39 step 1
+SBY 17:21:20 [fifo_cover] summary: cover trace: fifo_cover/engine_0/trace1.vcd
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_read_data_at_empty at fifo.sv:85.1-85.44 step 1
+SBY 17:21:20 [fifo_cover] summary: cover trace: fifo_cover/engine_0/trace2.vcd
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_rd_en_and_dout at fifo.sv:83.1-83.40 step 1
+SBY 17:21:20 [fifo_cover] summary: cover trace: fifo_cover/engine_0/trace3.vcd
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_data_sampling at fifo.sv:86.1-86.54 step 1
+SBY 17:21:20 [fifo_cover] summary: cover trace: fifo_cover/engine_0/trace4.vcd
+SBY 17:21:20 [fifo_cover] summary:   reached cover statement fifo.c_push_data_at_full at fifo.sv:84.1-84.42 step 1
+SBY 17:21:20 [fifo_cover] summary: and 3 further traces
+SBY 17:21:20 [fifo_cover] summary: see fifo_cover/PASS for a complete summary
+SBY 17:21:20 [fifo_cover] DONE (PASS, rc=0)
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 10..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 10..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 11..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assumptions in step 12..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:00  Checking assertions in step 12..
+SBY 17:21:20 [fifo_basic] engine_0: ##   0:00:01  Checking assumptions in step 13..
+SBY 17:21:21 [fifo_basic] engine_0: ##   0:00:01  Checking assertions in step 13..
+SBY 17:21:21 [fifo_basic] engine_0: ##   0:00:01  Checking assumptions in step 14..
+SBY 17:21:21 [fifo_basic] engine_0: ##   0:00:01  Checking assertions in step 14..
+SBY 17:21:21 [fifo_basic] engine_0: ##   0:00:01  Checking assumptions in step 15..
+SBY 17:21:21 [fifo_basic] engine_0: ##   0:00:01  Checking assertions in step 15..
+SBY 17:21:22 [fifo_basic] engine_0: ##   0:00:02  Checking assumptions in step 16..
+SBY 17:21:22 [fifo_basic] engine_0: ##   0:00:02  Checking assertions in step 16..
+SBY 17:21:22 [fifo_basic] engine_0: ##   0:00:02  Checking assumptions in step 17..
+SBY 17:21:22 [fifo_basic] engine_0: ##   0:00:02  Checking assertions in step 17..
+SBY 17:21:23 [fifo_basic] engine_0: ##   0:00:03  Checking assumptions in step 18..
+SBY 17:21:23 [fifo_basic] engine_0: ##   0:00:03  Checking assertions in step 18..
+SBY 17:21:24 [fifo_basic] engine_0: ##   0:00:04  Checking assumptions in step 19..
+SBY 17:21:24 [fifo_basic] engine_0: ##   0:00:04  Checking assertions in step 19..
+SBY 17:21:25 [fifo_basic] engine_0: ##   0:00:05  Checking assumptions in step 20..
+SBY 17:21:25 [fifo_basic] engine_0: ##   0:00:05  Checking assertions in step 20..
+SBY 17:21:26 [fifo_basic] engine_0: ##   0:00:07  Checking assumptions in step 21..
+SBY 17:21:27 [fifo_basic] engine_0: ##   0:00:07  Checking assertions in step 21..
+SBY 17:21:28 [fifo_basic] engine_0: ##   0:00:08  Checking assumptions in step 22..
+SBY 17:21:28 [fifo_basic] engine_0: ##   0:00:08  Checking assertions in step 22..
+SBY 17:21:31 [fifo_basic] engine_0: ##   0:00:11  Checking assumptions in step 23..
+SBY 17:21:31 [fifo_basic] engine_0: ##   0:00:11  Checking assertions in step 23..
+SBY 17:21:33 [fifo_basic] engine_0: ##   0:00:13  Checking assumptions in step 24..
+SBY 17:21:33 [fifo_basic] engine_0: ##   0:00:13  Checking assertions in step 24..
+SBY 17:21:35 [fifo_basic] engine_0: ##   0:00:16  Checking assumptions in step 25..
+SBY 17:21:35 [fifo_basic] engine_0: ##   0:00:16  Checking assertions in step 25..
+SBY 17:21:38 [fifo_basic] engine_0: ##   0:00:19  Checking assumptions in step 26..
+SBY 17:21:39 [fifo_basic] engine_0: ##   0:00:19  Checking assertions in step 26..
+SBY 17:21:42 [fifo_basic] engine_0: ##   0:00:22  Checking assumptions in step 27..
+SBY 17:21:42 [fifo_basic] engine_0: ##   0:00:22  Checking assertions in step 27..
+SBY 17:21:47 [fifo_basic] engine_0: ##   0:00:28  Checking assumptions in step 28..
+SBY 17:21:48 [fifo_basic] engine_0: ##   0:00:28  Checking assertions in step 28..
+SBY 17:21:51 [fifo_basic] engine_0: ##   0:00:32  Checking assumptions in step 29..
+SBY 17:21:52 [fifo_basic] engine_0: ##   0:00:32  Checking assertions in step 29..
+SBY 17:21:58 [fifo_basic] engine_0: ##   0:00:38  Checking assumptions in step 30..
+SBY 17:21:58 [fifo_basic] engine_0: ##   0:00:39  Checking assertions in step 30..
+SBY 17:22:02 [fifo_basic] engine_0: ##   0:00:42  Checking assumptions in step 31..
+SBY 17:22:02 [fifo_basic] engine_0: ##   0:00:43  Checking assertions in step 31..
+SBY 17:22:08 [fifo_basic] engine_0: ##   0:00:48  Status: passed
+SBY 17:22:08 [fifo_basic] engine_0: finished (returncode=0)
+SBY 17:22:08 [fifo_basic] engine_0: Status returned by engine: pass
+SBY 17:22:08 [fifo_basic] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:49 (49)
+SBY 17:22:08 [fifo_basic] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:49 (49)
+SBY 17:22:08 [fifo_basic] summary: engine_0 (smtbmc boolector) returned pass
+SBY 17:22:08 [fifo_basic] summary: engine_0 did not produce any traces
+SBY 17:22:08 [fifo_basic] DONE (PASS, rc=0)
+[1]+  Done                    gtkwave fifo_basic/engine_0/trace.vcd
+⦗OSS CAD Suite⦘ india@india-Lenovo-ideapad-320-15IKB:~/Downloads/yosys$ 

@@ -1,4 +1,6 @@
 # Formal-verification-of-Synchronous-FIFO-
+RTL source : https://www.chipverify.com/verilog/synchronous-fifo
+
 ```
 OSS CAD Suite⦘ india@india-Lenovo-ideapad-320-15IKB:~/Downloads/yosys$ sby -f fifo.sby 
 SBY 10:03:15 [fifo_basic] Removing directory '/home/india/Downloads/yosys/fifo_basic'.

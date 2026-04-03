@@ -113,13 +113,13 @@ if( rstn  && $past(rstn)) begin
   
   if( full ) begin 
   	a_full : assert (data_count == (DEPTH-1));
-        c_full : cover(wr_en && !rd_en && (data_count == (DEPTH-1))     );
+    c_full : cover(wr_en && !rd_en && (data_count == (DEPTH-1)) );
 end   else
   	a_not_full : assert (data_count != (DEPTH-1));
   
   if( empty) begin
   	a_empty : assert (data_count ==0 );
-        c_empty : cover( !wr_en && rd_en && data_count==0);
+    c_empty : cover( !wr_en && rd_en && data_count==0);
  end else
   	a_empty_not : assert (data_count != 0);
   

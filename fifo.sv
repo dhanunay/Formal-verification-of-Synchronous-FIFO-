@@ -1,4 +1,4 @@
-module fifo #(parameter DEPTH=16, DWIDTH=16)
+module fifo #(parameter DEPTH=8, DWIDTH=16)
 (
         input               	rstn,               // Active low reset
                             	clk,                // Clock
@@ -57,8 +57,6 @@ assign data_count = (wptr >= rptr) ? (wptr-rptr) : (wptr+DEPTH-rptr);
 parameter IDLE=1'b0,
           START=1'b1;
 reg state;
-
-
 initial begin 
 m_initial_rst: assume (!rstn);
 f_past_valid =0;
@@ -67,16 +65,22 @@ end
 always @(posedge clk)
   f_past_valid <= 1'b1;
 
-
 always @(posedge clk, negedge rstn)
 if(!rstn) ND_start_seen   <= 1'b0;
 else if(ND_start) ND_start_seen <= 1'b1;
 
 always @(posedge clk) begin
- //if(f_past_valid)
- //assume( $countones($past(din)^(din)) == 0 );
+ if(f_past_valid)
+ m_new_data: assume( $countones($past(din)^(din)) != 0 );
 if(ND_start_seen) m_ND_start: assume (ND_start ==0);
-if(state== START) m_wr_en_0 :assume (!wr_en );
+if(state== START) m_wr_en_0  :assume (!wr_en );
+c_reset_0           : cover (!rstn);
+c_reset_1           : cover (rstn);
+c_wr_en_and_din     : cover(wr_en && din); 
+c_rd_en_and_dout    : cover(rd_en && dout);
+c_push_data_at_full : cover(wr_en && full);
+c_read_data_at_empty: cover(rd_en && empty);
+c_data_sampling     : cover(ND_start && wr_en && (!full));
 end 
 
 always @(posedge clk) begin
@@ -88,6 +92,7 @@ a_initial_rptr : assert (rptr == 0);
 a_initial_full : assert  (!full );
 
 a_initial_empty: assert  (empty); 
+
 end  
 
 if( rstn  && $past(rstn)) begin
@@ -106,15 +111,18 @@ if( rstn  && $past(rstn)) begin
   			 wptr == $past(wptr)+1'b1
   			);	
   
-  if((wptr + 1'b1) == rptr)
-  	a_full : assert (full);
-  else
-  	a_not_full : assert (!full);
+  if( full ) begin 
+  	a_full : assert (data_count == (DEPTH-1));
+        c_full : cover(wr_en && !rd_en && (data_count == (DEPTH-1))     );
+end   else
+  	a_not_full : assert (data_count != (DEPTH-1));
   
-  if( rptr == wptr)
-  	a_empty : assert (empty);
-  else
-  	a_empty_not : assert (!empty);
+  if( empty) begin
+  	a_empty : assert (data_count ==0 );
+        c_empty : cover( !wr_en && rd_en && data_count==0);
+ end else
+  	a_empty_not : assert (data_count != 0);
+  
 end 
 end
 
@@ -135,7 +143,6 @@ IDLE : if(!ND_start && !wr_en  )
 START : if(rd_en && idx>0)    idx <=  idx - 1'b1;
 endcase
 end  
- 
 //assert  @(posedge clk   disable iff(!rstn)  idx ==1 && rd_en |=> dout == enq_data );
 
 always @(posedge clk) begin

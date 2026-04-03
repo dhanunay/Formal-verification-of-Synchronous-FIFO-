@@ -1,0 +1,47 @@
+Formal verifaction of Synchronous FIFO,
+TOOL : symbi yosys,
+,
+,
+,
+,
+,
+Assumptions,Description
+,
+m_initial_rst,Put the Fifo design in reset state before applying any inputs
+m_ND_start,ND_start should be single pulse in entire proof
+m_wr_en_0,write enable should be zero in FSM �start� state
+m_new_data,generate unique values every cycle
+,
+Assertions,Description
+,
+a_initial_wptr,When Active low synchronous reset is asserted the write ponter should be zero in next cycle
+a_initial_rptr,When Active low synchronous reset is asserted the read ponter should be zero in next cycle
+a_initial_full,When Active low synchronous reset is asserted the output full condition should be zero
+a_initial_empty,When Active low synchronous reset is asserted the output empty condition should be one
+,
+a_overflow,write pointer should always less than the depth of the fifo
+a_wr_addr,The write pointer increment restricted to change by +1 or hold to previous value
+a_rd_addr,The read pointer increment restricted to change by +1 or hold to previous value
+,
+a_empty,Empty condition should be high when (wptr == rptr)   condition is satisfied
+a_not_empty,Empty condition should be Low when (wptr != rptr)   condition is satisfied
+,
+a_full,Full condition should be High when  (wptr + 1  == rptr) condition is satisfied
+a_not_full,Full condition should be Low when  (wptr + 1  != rptr) condition is satisfied
+a_full_empty_mutex,Full and empty condition should be nutually exclusive
+,
+a_check_data,When the depth of the fifo is 1 and rd_en the dout should be equal to stored data at ND_start
+,
+,
+,
+COVER,Description
+,
+c_reset_0,Reset should be low
+c_reset_1,Reset should be High
+c_wr_en_and_din,wr_en and din have occured
+c_rd_en_and_dout,rd_en and dout have occured
+c_push_data_at_full,Push data at full to check all in
+c_read_data_at_empty,Read data at empty
+c_data_sampling,check Non determinism to capture random data to capture fifo pointers intergrity
+c_full,Full condition have occured
+c_empty,Empty condition have occured

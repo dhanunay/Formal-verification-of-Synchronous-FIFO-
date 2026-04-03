@@ -102,13 +102,13 @@ if( rstn  && $past(rstn)) begin
   a_overflow : assert  (wptr <  DEPTH );
 
   a_rd_addr  : assert ( rptr == 0	|| 
-    		        rptr == $past(rptr) ||
-  			rptr == $past(rptr)+1'b1
+    		           rptr == $past(rptr) ||
+  			           rptr == $past(rptr)+1'b1
   			);	
   
   a_wr_addr : assert (   wptr == 0	|| 
-    			 wptr == $past(wptr) ||
-  			 wptr == $past(wptr)+1'b1
+    			         wptr == $past(wptr) ||
+  			             wptr == $past(wptr)+1'b1
   			);	
   
   if( full ) begin 
@@ -138,9 +138,9 @@ IDLE : if(!ND_start && !wr_en  )
        else if(ND_start && wr_en && (!full) ) begin 
         state <= START;
         enq_data <= din; 
-	 if(rd_en) idx <= data_count; else idx<= data_count + 1'b1;
+	      if(rd_en) idx <= data_count; else idx<= data_count + 1'b1;
        end 
-START : if(rd_en && idx>0)    idx <=  idx - 1'b1;
+START : if(rd_en && idx>0)    idx <= idx - 1'b1;
 endcase
 end  
 //assert  @(posedge clk   disable iff(!rstn)  idx ==1 && rd_en |=> dout == enq_data );
@@ -148,7 +148,7 @@ end
 always @(posedge clk) begin
 if(f_past_valid && rstn && $past(rstn))   
    if($past(idx) == 1 &&  $past(rd_en) )
-      a_check_data :  assert  (  dout == enq_data);
+      a_check_data :  assert(dout == enq_data);
 end 
 `endif
 endmodule

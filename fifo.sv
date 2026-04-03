@@ -88,7 +88,6 @@ a_initial_rptr : assert (rptr == 0);
 a_initial_full : assert  (!full );
 
 a_initial_empty: assert  (empty); 
-
 end  
 
 if( rstn  && $past(rstn)) begin
@@ -116,10 +115,8 @@ if( rstn  && $past(rstn)) begin
   	a_empty : assert (empty);
   else
   	a_empty_not : assert (!empty);
-  
 end 
 end
-
 
 always @(posedge clk)
 if(!rstn)  begin 
@@ -137,7 +134,6 @@ IDLE : if(!ND_start && !wr_en  )
        end 
 START : if(rd_en && idx>0)    idx <=  idx - 1'b1;
 endcase
-
 end  
  
 //assert  @(posedge clk   disable iff(!rstn)  idx ==1 && rd_en |=> dout == enq_data );
@@ -146,11 +142,6 @@ always @(posedge clk) begin
 if(f_past_valid && rstn && $past(rstn))   
    if($past(idx) == 1 &&  $past(rd_en) )
       a_check_data :  assert  (  dout == enq_data);
-
 end 
-
 `endif
-
-
-
 endmodule

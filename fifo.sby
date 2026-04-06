@@ -1,8 +1,5 @@
 [tasks]
 basic bmc
-repro_bug1 prove
-repro_bug2 prove
-repro_bug3 prove
 cover
 noverific cover
 basic cover : default
@@ -13,6 +10,7 @@ mode cover
 --
 prove:
 mode prove
+mode 20
 --
 bmc: 
 mode bmc
@@ -23,9 +21,6 @@ depth 32
 smtbmc boolector
 
 [script]
-repro_bug1: read -define BUG1=1
-repro_bug2: read -define BUG2=1
-repro_bug3: read -define BUG3=1
 noverific: read -noverific
 read -formal fifo.sv
 prep -top fifo
